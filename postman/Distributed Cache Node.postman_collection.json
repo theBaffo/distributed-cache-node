@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "4877e8d5-e636-4bde-bc58-8188349061ea",
+		"name": "Distributed Cache Node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32693052"
+	},
+	"item": [
+		{
+			"name": "cache",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/cache/test-key",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"cache",
+						"test-key"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cache",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"value\": \"lol\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/cache/test-key",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"cache",
+						"test-key"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
