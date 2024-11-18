@@ -1,5 +1,6 @@
 package com.example.distributed_cache_node.controllers;
 
+import com.example.distributed_cache_node.exceptions.CacheEntryNotFoundException;
 import com.example.distributed_cache_node.models.CacheEntry;
 import com.example.distributed_cache_node.services.CacheQueryService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,9 @@ public class CacheQueryController {
   }
 
   // TODO return DTO
-  // TODO return exception
   @GetMapping("/{key}")
-  public CacheEntry getCacheEntry(@PathVariable("key") String key) {
+  public CacheEntry getCacheEntry(@PathVariable("key") String key)
+      throws CacheEntryNotFoundException {
     return cacheQueryService.get(key);
   }
 }

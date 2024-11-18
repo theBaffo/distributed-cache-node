@@ -1,5 +1,6 @@
 package com.example.distributed_cache_node.services;
 
+import com.example.distributed_cache_node.exceptions.CacheEntryNotFoundException;
 import com.example.distributed_cache_node.models.CacheEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -10,10 +11,13 @@ public class CacheQueryServiceImpl implements CacheQueryService {
   @Autowired private StringRedisTemplate redisTemplate;
 
   @Override
-  public CacheEntry get(String key) {
+  public CacheEntry get(String key) throws CacheEntryNotFoundException {
     String value = redisTemplate.opsForValue().get(key);
 
-    // TODO Implement
+    if (value == null) {
+      throw new CacheEntryNotFoundException(key);
+    }
+
     var entry = new CacheEntry(key, value);
     return entry;
   }
