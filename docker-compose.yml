@@ -17,6 +17,7 @@ services:
     ports:
       - 6479:6379
     command: redis-server --replicaof redis-master 6379
+
 volumes:
   redis_master:
   redis_replica:
