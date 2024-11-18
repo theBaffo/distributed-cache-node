@@ -6,7 +6,7 @@ services:
     volumes:
       - redis_master:/data
     ports:
-      - 6379:6379
+      - ${REDIS_PORT}:${REDIS_PORT}
 
   redis-replica:
     image: redis:6.0.7
@@ -15,8 +15,8 @@ services:
     volumes:
       - redis_replica:/data
     ports:
-      - 6479:6379
-    command: redis-server --replicaof redis-master 6379
+      - ${REDIS_REPLICA_PORT}:${REDIS_PORT}
+    command: redis-server --replicaof redis-master ${REDIS_PORT}
 
 volumes:
   redis_master:
