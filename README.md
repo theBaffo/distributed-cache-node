@@ -2,7 +2,7 @@
 
 A single node for a distributed cache application.
 
-## Setup
+## Setup (MacOS)
 
 First, create an `.env` file by coping the existing `.env.example`, and modify it as needed.
 
@@ -28,9 +28,9 @@ Finally, run the application with the following command:
 
 The following API endpoints are available:
 
-- GET `{host}/cache/{key}` - Retrieves a cache entry
+- GET `/cache/{key}` - Retrieves a cache entry
   - Throws a 404 exception if key is not found
-- PUT `{host}/cache/{key}` - Creates, or updates, a specific cache entry
+- PUT `/cache/{key}` - Creates, or updates, a specific cache entry
 
 ## Postman
 
