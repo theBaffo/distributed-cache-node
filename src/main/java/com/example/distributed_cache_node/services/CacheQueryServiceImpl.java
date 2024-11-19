@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class CacheQueryServiceImpl implements CacheQueryService {
-  private StringRedisTemplate redisTemplate;
+  private StringRedisTemplate stringRedisTemplate;
   private CacheMapper cacheMapper;
 
   @Override
   public CacheEntryDto get(String key) throws CacheEntryNotFoundException {
-    String value = redisTemplate.opsForValue().get(key);
+    String value = stringRedisTemplate.opsForValue().get(key);
 
     if (value == null) {
       throw new CacheEntryNotFoundException(key);
