@@ -2,6 +2,7 @@ services:
   redis-master:
     image: redis:6.0.7
     container_name: redis-master
+    command: ["redis-server", "--maxmemory", "100mb", "--maxmemory-policy", "allkeys-lru"]
     restart: always
     volumes:
       - redis_master:/data
