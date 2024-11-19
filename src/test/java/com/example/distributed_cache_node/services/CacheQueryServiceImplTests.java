@@ -47,7 +47,7 @@ public class CacheQueryServiceImplTests {
   }
 
   @Test
-  void getCacheEntryNotFoundTest() throws CacheEntryNotFoundException {
+  void getNotFoundTest() throws CacheEntryNotFoundException {
     // Arrange
     when(stringRedisTemplate.opsForValue()).thenReturn(valueOperations);
     when(valueOperations.get("key")).thenReturn(null);
