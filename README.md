@@ -1,26 +1,40 @@
 # Distributed Cache - Node
 
-A single node for a distributed cache application.
+A functional prototype of a cache "node" for a distributed cache system.
+
+The application is written in Java and Spring Boot, and it is covered with integration and end-to-end tests.
+
+Given the time constraint for this project, and the prototype nature of the project itself, the project presents some limitations:
+- As Redis Cluster is not supported in Docker, I decided to use a simple master-replica Redis setup, which was compatible with Docker.
+- I decided to store simple key/value String pairs, instead of more complex objects.
+
+## Architecture Diagram
+
+![Architecture](./images/diagrams/cache-node.jpg)
 
 ## Setup (MacOS)
 
 First, create an `.env` file by coping the existing `.env.example`, and modify it as needed.
 
+```sh
+cp .env.example .env
+```
+
 Then, source the `.env` file by running the following command:
 
-```
+```sh
 source .env
 ```
 
-Then, run docker compose with the following command:
+After that, create the two Redis instances (master + replica) with the following command:
 
-```
+```sh
 docker compose up -d
 ```
 
 Finally, run the application with the following command:
 
-```
+```sh
 ./gradlew bootRun
 ```
 
