@@ -4,6 +4,7 @@ import com.example.distributed_cache_node.dtos.CacheEntryDto;
 import com.example.distributed_cache_node.dtos.CacheEntryPutDto;
 import com.example.distributed_cache_node.exceptions.CacheEntryNotFoundException;
 import com.example.distributed_cache_node.services.CacheCommandService;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,12 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Profile("command")
 @RestController
 @RequestMapping("/cache")
+@AllArgsConstructor
 public class CacheCommandController {
   private CacheCommandService cacheCommandService;
-
-  public CacheCommandController(CacheCommandService cacheCommandService) {
-    this.cacheCommandService = cacheCommandService;
-  }
 
   @PutMapping("/{key}")
   @ResponseStatus(HttpStatus.CREATED)
