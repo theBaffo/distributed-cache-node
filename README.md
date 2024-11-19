@@ -24,6 +24,13 @@ Finally, run the application with the following command:
 ./gradlew bootRun
 ```
 
+## Run the tests
+To run the tests with Gradle use the following command:
+
+```sh
+$ gradlew clean test
+```
+
 ## API endpoints
 
 The following API endpoints are available:
@@ -31,6 +38,8 @@ The following API endpoints are available:
 - GET `/cache/{key}` - Retrieves a cache entry
   - Throws a 404 exception if key is not found
 - PUT `/cache/{key}` - Creates, or updates, a specific cache entry
+- DELETE `/cache/{key}` - Deletes a specific cache entry
+  - Throws a 404 exception if key is not found
 
 ## Postman
 

@@ -27,11 +27,29 @@
 		{
 			"name": "cache",
 			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/cache/test-key",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"cache",
+						"test-key"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cache",
+			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"value\": \"lol\"\n}",
+					"raw": "{\n\t\"value\": \"some value\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
