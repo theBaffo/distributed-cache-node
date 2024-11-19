@@ -1,5 +1,6 @@
 package com.example.distributed_cache_node.services;
 
+import com.example.distributed_cache_node.exceptions.CacheEntryNotFoundException;
 import com.example.distributed_cache_node.models.CacheEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -15,7 +16,17 @@ public class CacheCommandServiceImpl implements CacheCommandService {
   public CacheEntry put(String key, String value) {
     redisTemplate.opsForValue().set(key, value);
 
-    var entry = new CacheEntry(key, value);
-    return entry;
+    return new CacheEntry(key, value);
+  }
+
+  @Override
+  public CacheEntry delete(String key) throws CacheEntryNotFoundException {
+    String value = redisTemplate.opsForValue().getAndDelete(key);
+
+    if (value == null) {
+      throw new CacheEntryNotFoundException(key);
+    }
+
+    return new CacheEntry(key, value);
   }
 }
