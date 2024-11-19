@@ -18,7 +18,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 @ExtendWith(MockitoExtension.class)
-public class CacheQueryServiceImplTests {
+public class CacheCommandServiceImplTests {
   @Mock private StringRedisTemplate stringRedisTemplate;
   @Mock private ValueOperations<String, String> valueOperations;
   @Mock private CacheMapper cacheMapper;
@@ -27,19 +27,18 @@ public class CacheQueryServiceImplTests {
   static void setup() {}
 
   @Test
-  void getTest() throws CacheEntryNotFoundException {
+  void putTest() {
     // Arrange
     CacheEntry cacheEntry = new CacheEntry("key", "value");
     CacheEntryDto cacheEntryDto = new CacheEntryDto("key", "value");
 
     when(stringRedisTemplate.opsForValue()).thenReturn(valueOperations);
-    when(valueOperations.get("key")).thenReturn("value");
     when(cacheMapper.convertToDto(cacheEntry)).thenReturn(cacheEntryDto);
 
     // Act
-    CacheQueryService service =
-        new CacheQueryServiceImpl(this.stringRedisTemplate, this.cacheMapper);
-    CacheEntryDto cacheEntryResult = service.get("key");
+    CacheCommandService service =
+        new CacheCommandServiceImpl(this.stringRedisTemplate, this.cacheMapper);
+    CacheEntryDto cacheEntryResult = service.put("key", "value");
 
     // Assert
     assertNotNull(cacheEntryResult);
@@ -47,16 +46,36 @@ public class CacheQueryServiceImplTests {
   }
 
   @Test
-  void getCacheEntryNotFoundTest() throws CacheEntryNotFoundException {
+  void deleteTest() throws CacheEntryNotFoundException {
     // Arrange
+    CacheEntry cacheEntry = new CacheEntry("key", "value");
+    CacheEntryDto cacheEntryDto = new CacheEntryDto("key", "value");
+
     when(stringRedisTemplate.opsForValue()).thenReturn(valueOperations);
-    when(valueOperations.get("key")).thenReturn(null);
+    when(valueOperations.getAndDelete("key")).thenReturn("value");
+    when(cacheMapper.convertToDto(cacheEntry)).thenReturn(cacheEntryDto);
 
     // Act
-    CacheQueryService service =
-        new CacheQueryServiceImpl(this.stringRedisTemplate, this.cacheMapper);
+    CacheCommandService service =
+        new CacheCommandServiceImpl(this.stringRedisTemplate, this.cacheMapper);
+    CacheEntryDto cacheEntryResult = service.delete("key");
 
     // Assert
-    Assertions.assertThrows(CacheEntryNotFoundException.class, () -> service.get("key"));
+    assertNotNull(cacheEntryResult);
+    assertEquals(cacheEntryDto, cacheEntryResult);
+  }
+
+  @Test
+  void deleteNotFoundTest() throws CacheEntryNotFoundException {
+    // Arrange
+    when(stringRedisTemplate.opsForValue()).thenReturn(valueOperations);
+    when(valueOperations.getAndDelete("key")).thenReturn(null);
+
+    // Act
+    CacheCommandService service =
+        new CacheCommandServiceImpl(this.stringRedisTemplate, this.cacheMapper);
+
+    // Assert
+    Assertions.assertThrows(CacheEntryNotFoundException.class, () -> service.delete("key"));
   }
 }
