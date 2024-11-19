@@ -45,6 +45,8 @@ To run the tests with Gradle use the following command:
 $ gradlew clean test
 ```
 
+Be sure that the Redis instance are up and running, as those are used by the end-to-end tests.
+
 ## API endpoints
 
 The following API endpoints are available:
