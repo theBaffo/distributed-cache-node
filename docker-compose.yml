@@ -1,6 +1,6 @@
 services:
   redis-master:
-    image: redis:6.0.7
+    image: redis:7.4.1
     container_name: redis-master
     command: ["redis-server", "--maxmemory", "100mb", "--maxmemory-policy", "allkeys-lru"]
     restart: always
@@ -10,7 +10,7 @@ services:
       - ${REDIS_PORT}:${REDIS_PORT}
 
   redis-replica:
-    image: redis:6.0.7
+    image: redis:7.4.1
     container_name: redis-replica
     restart: always
     volumes:
