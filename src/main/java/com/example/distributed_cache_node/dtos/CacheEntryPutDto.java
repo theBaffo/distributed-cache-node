@@ -1,13 +1,13 @@
 package com.example.distributed_cache_node.dtos;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CacheEntryPutDto {
-  private @NonNull String value;
+  private @NotBlank String value;
 }
