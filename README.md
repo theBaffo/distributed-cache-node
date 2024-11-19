@@ -57,4 +57,4 @@ The following API endpoints are available:
 
 ## Postman
 
-In the `postman` folder you can find a collection and an environment file that you can import in Postman, or similar tool (?), to easily test the API.
+In the `postman` folder you can find a collection and an environment file that you can import in Postman, or a similar tool, to easily test the API.
