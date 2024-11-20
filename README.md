@@ -4,7 +4,7 @@ A functional prototype of a cache "node" for a distributed cache system.
 
 The application is written in Java and Spring Boot, and it is covered with integration and end-to-end tests.
 
-Given the time constraint for this project, and the prototype nature of the project itself, the project presents some limitations:
+Given the time constraint for this project, and the prototype nature of it, there are some limitations in place:
 - As Redis Cluster is not supported in Docker, I decided to use a simple master-replica Redis setup, which was compatible with Docker.
 - I decided to store simple key/value String pairs, instead of more complex objects.
 
@@ -39,7 +39,7 @@ Finally, run the application with the following command:
 ```
 
 ## Run the tests
-To run the tests with Gradle use the following command:
+To run the tests use the following command:
 
 ```sh
 $ gradlew clean test
